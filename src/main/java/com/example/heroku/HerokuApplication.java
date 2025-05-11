@@ -94,6 +94,7 @@ public class HerokuApplication {
     for (int i = 0; i < 30; i++) {
         sb.append(chars.charAt(random.nextInt(chars.length())));
     }
-    return sb.toString();
+    String lol = "lol";
+    return lol;
 }
 }
