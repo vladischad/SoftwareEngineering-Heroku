@@ -56,6 +56,24 @@ public class HerokuApplication {
     return "index";
   }
 
+  @RequestMapping("/dbinput")
+  public String dbInputForm() {
+      return "dbinput";
+  }
+
+  @RequestMapping(value = "/submit", method = org.springframework.web.bind.annotation.RequestMethod.POST)
+  public String submitForm(@org.springframework.web.bind.annotation.RequestParam("userInput") String userInput, Map<String, Object> model) {
+      try (Connection connection = dataSource.getConnection()) {
+          Statement stmt = connection.createStatement();
+          stmt.executeUpdate("CREATE TABLE IF NOT EXISTS table_timestamp_and_random_string (tick timestamp, random_string varchar(30))");
+          stmt.executeUpdate("INSERT INTO table_timestamp_and_random_string VALUES (now(), '" + userInput + "')");
+          return "redirect:/db";
+      } catch (Exception e) {
+          model.put("message", e.getMessage());
+          return "error";
+      }
+  }
+
   @RequestMapping("/db")
   String db(Map<String, Object> model) {
     System.out.println("Accessed /db route - Vladyslav Maliutin");
