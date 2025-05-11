@@ -27,6 +27,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.sql.DataSource;
+
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -85,11 +87,13 @@ public class HerokuApplication {
     }
   }
 
-  public String getRandomString() {
-    StringBuilder sb = new StringBuilder();
+  public static String getRandomString() {
+    String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    SecureRandom random = new SecureRandom();
+    StringBuilder sb = new StringBuilder(30);
     for (int i = 0; i < 30; i++) {
-      sb.append((char) ((Math.random() * 26) + 'a'));
+        sb.append(chars.charAt(random.nextInt(chars.length())));
     }
     return sb.toString();
-  } 
+}
 }
