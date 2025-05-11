@@ -65,9 +65,9 @@ public class HerokuApplication {
       ResultSet rs = stmt.executeQuery("SELECT tick, random_string FROM table_timestamp_and_random_string");
 
       ArrayList<String> output = new ArrayList<String>();
-      while (rs.next()) {
-        output.add("Read from DB: " + rs.getTimestamp("tick"));
-      }
+while (rs.next()) {
+  output.add("Read from DB: " + rs.getTimestamp("tick") + " | Random String: " + rs.getString("random_string"));
+}
 
       model.put("records", output);
       return "db";
