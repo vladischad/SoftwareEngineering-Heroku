@@ -16,6 +16,7 @@
 
 package com.example.heroku;
 
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -76,11 +77,12 @@ public class HerokuApplication {
     }
   }
 
-  private String getRandomString() 
-  {
-    StringBuilder sb = new StringBuilder();
+  public static String getRandomString() {
+    String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    SecureRandom random = new SecureRandom();
+    StringBuilder sb = new StringBuilder(30);
     for (int i = 0; i < 30; i++) {
-      sb.append((char) ('a' + Math.random() * 26));
+        sb.append(chars.charAt(random.nextInt(chars.length())));
     }
     return sb.toString();
   }
