@@ -36,6 +36,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
 
+import java.security.SecureRandom;
+
 @Controller
 @SpringBootApplication
 public class HerokuApplication {
@@ -94,7 +96,6 @@ public class HerokuApplication {
     for (int i = 0; i < 30; i++) {
         sb.append(chars.charAt(random.nextInt(chars.length())));
     }
-    String lol = "lol";
-    return lol;
-}
+    return sb.toString();
+  }
 }
